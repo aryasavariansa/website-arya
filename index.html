@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arya Savariansah - Portfolio Dashboard</title>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Mobile Menu Toggle Button -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Tombol Tambah Work di Pojok Kanan Atas -->
+    <button class="floating-add-btn" id="floatingAddBtn">
+        <i class="fas fa-plus-circle"></i> Tambah Work
+    </button>
+
+    <!-- Tombol Toggle Efek -->
+    <button class="effect-toggle" id="effectToggle">
+        <i class="fas fa-magic" id="effectIcon"></i>
+        <span id="effectText">Aktifkan Efek</span>
+    </button>
+
+    <!-- Container Efek Rain untuk About Page -->
+    <div class="rain-container" id="rainContainer"></div>
+
+    <!-- Container Efek Starfall untuk Chat Room -->
+    <div class="starfall-container" id="starfallContainer"></div>
+
+    <!-- Overlay untuk efek rain -->
+    <div class="effect-overlay rain-overlay" id="rainOverlay" style="display: none;"></div>
+
+    <!-- Overlay untuk efek starfall -->
+    <div class="effect-overlay starfall-overlay" id="starfallOverlay" style="display: none;"></div>
+
+    <!-- SIDEBAR ELEGAN (TETAP TANPA SCROLL) -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="profile-section">
+                <div class="profile-img-container" id="profileImgContainer">
+                    <div class="profile-img" id="profileImg">
+                        <div class="profile-img-placeholder">
+                            <i class="fas fa-user-tie" id="profileIcon"></i>
+                        </div>
+                    </div>
+                    <button class="profile-img-upload" id="profileUploadBtn" title="Upload Foto Profile">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <div class="profile-info">
+                    <h2>Arya Savariansah</h2>
+                    <p>Spesialis Manufaktur</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Menu Navigasi -->
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about" class="nav-link" data-page="about"><i class="fas fa-user"></i> About Me</a></li>
+            <li><a href="#work" class="nav-link" data-page="work"><i class="fas fa-briefcase"></i> Work</a></li>
+            <li><a href="#achievements" class="nav-link" data-page="achievements"><i class="fas fa-trophy"></i> Achievements</a></li>
+            <li><a href="#projects" class="nav-link" data-page="projects"><i class="fas fa-project-diagram"></i> Projects</a></li>
+            <li><a href="#dashboard" class="nav-link" data-page="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="#chatroom" class="nav-link" data-page="chatroom"><i class="fas fa-comments"></i> Chat Room</a></li>
+            <li><a href="#contact" class="nav-link" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+        
+        <!-- Admin Panel -->
+        <div class="admin-section">
+            <button class="admin-toggle" id="adminToggle">
+                <i class="fas fa-user-lock"></i> Login Admin
+            </button>
+            
+            <div class="admin-panel" id="adminPanel">
+                <h3>Login Admin</h3>
+                <input type="password" id="adminPassword" class="admin-input" placeholder="Password Admin">
+                <button class="admin-btn" id="adminLogin">Login</button>
+                
+                <div id="adminControls" style="display: none;">
+                    <h3>Edit Mode</h3>
+                    <button class="admin-btn" id="toggleEditMode">Aktifkan Edit Mode</button>
+                    <button class="admin-btn" id="saveAllData">Simpan Semua Data</button>
+                    <button class="admin-btn" id="adminLogout">Logout</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p>© 2026 Arya Savariansah. All rights reserved.</p>
+        </div>
+    </aside>
+    
+    <!-- KONTEN UTAMA DENGAN SCROLL DI POJOK KANAN -->
+    <main class="main-content" id="mainContent">
+        <!-- Content Header -->
+        <div class="content-header">
+            <div class="page-title">
+                <h2 id="currentPageTitle">Home</h2>
+                <p id="currentPageDesc">Selamat datang di portfolio Arya Savariansah</p>
+            </div>
+            <div class="edit-status" id="editStatus">
+                <i class="fas fa-edit"></i> Edit Mode Aktif
+            </div>
+        </div>
+        
+        <!-- Content Body - Pages (SCROLLABLE PENUH) -->
+        <div class="content-body" id="contentBody">
+            <!-- Home Page - UPDATED -->
+            <div class="page active" id="homePage">
+                <div class="home-hero">
+                    <div class="particles" id="particles"></div>
+                    <div class="hero-content">
+                        <div class="hero-badge editable">
+                            <span id="homeBadge">✨ Lulusan SMK Teknik Permesinan ✨</span>
+                            <button class="edit-btn" data-edit="homeBadge">Edit</button>
+                        </div>
+                        
+                        <h1 class="hero-title editable" id="homeTitle">ARYA SAVARIANSAH</h1>
+                        <button class="edit-btn" data-edit="homeTitle">Edit</button>
+                        
+                        <div class="hero-subtitle editable" id="homeSubtitle">
+                            <i class="fas fa-star" style="color: var(--primary); margin-right: 10px;"></i>
+                            Spesialis Manufaktur & Produksi
+                            <i class="fas fa-star" style="color: var(--primary); margin-left: 10px;"></i>
+                        </div>
+                        <button class="edit-btn" data-edit="homeSubtitle">Edit</button>
+                        
+                        <p class="hero-description editable" id="homeDescription">
+                            Lulusan SMK Teknik Permesinan dengan pengalaman di bidang manufaktur dan produksi. 
+                            Terbiasa menangani perencanaan produksi, quality control, manajemen stok & distribusi, 
+                            hingga mechanical drafting.
+                        </p>
+                        <button class="edit-btn" data-edit="homeDescription">Edit</button>
+                        
+                        <div class="hero-actions">
+                            <button class="upload-btn primary" onclick="changePage('about')" 
+                                    style="padding: 15px 35px; font-size: 1rem; background: var(--gradient-gold); color: #000; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; transition: var(--transition);">
+                                <i class="fas fa-user"></i> Lihat Profil Lengkap
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card editable">
+                        <div class="stat-number" id="stat1Number">15%</div>
+                        <div class="stat-label" id="stat1Label">Pengurangan Waktu Setup</div>
+                        <button class="edit-btn" data-edit="stat1Number">Edit</button>
+                        <button class="edit-btn" data-edit="stat1Label">Edit</button>
+                    </div>
+                    
+                    <div class="stat-card editable">
+                        <div class="stat-number" id="stat2Number">60%</div>
+                        <div class="stat-label" id="stat2Label">Penurunan Reject Material</div>
+                        <button class="edit-btn" data-edit="stat2Number">Edit</button>
+                        <button class="edit-btn" data-edit="stat2Label">Edit</button>
+                    </div>
+                    
+                    <div class="stat-card editable">
+                        <div class="stat-number" id="stat3Number">20%</div>
+                        <div class="stat-label" id="stat3Label">Peningkatan Efisiensi</div>
+                        <button class="edit-btn" data-edit="stat3Number">Edit</button>
+                        <button class="edit-btn" data-edit="stat3Label">Edit</button>
+                    </div>
+                    
+                    <div class="stat-card editable">
+                        <div class="stat-number" id="stat4Number">67%</div>
+                        <div class="stat-label" id="stat4Label">Pengurangan Lead Time</div>
+                        <button class="edit-btn" data-edit="stat4Number">Edit</button>
+                        <button class="edit-btn" data-edit="stat4Label">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="quick-links">
+                    <h3>Akses Cepat</h3>
+                    <div class="links-grid">
+                        <div class="link-card" onclick="changePage('work')">
+                            <div class="link-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h4>Work</h4>
+                            <p>Dokumentasi pekerjaan dan proyek yang telah dikerjakan</p>
+                        </div>
+                        
+                        <div class="link-card" onclick="changePage('projects')">
+                            <div class="link-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h4>Projects</h4>
+                            <p>Proyek dan portofolio pekerjaan terbaik</p>
+                        </div>
+                        
+                        <div class="link-card" onclick="changePage('achievements')">
+                            <div class="link-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h4>Achievements</h4>
+                            <p>Sertifikat dan pencapaian profesional</p>
+                        </div>
+                        
+                        <div class="link-card" onclick="changePage('contact')">
+                            <div class="link-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h4>Contact</h4>
+                            <p>Hubungi saya untuk kolaborasi dan kerja sama</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- About Me Page -->
+            <div class="page" id="aboutPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Tentang Saya</h2>
+                
+                <div class="about-content">
+                    <div>
+                        <div class="editable" id="aboutText1">
+                            <p>Lulusan SMK Teknik Permesinan dengan pengalaman di bidang manufaktur dan produksi. 
+                            Terbiasa menangani perencanaan produksi, quality control, manajemen stok & distribusi, 
+                            hingga mechanical drafting.</p>
+                        </div>
+                        <button class="edit-btn" data-edit="aboutText1">Edit</button>
+                        
+                        <div class="editable" id="aboutText2">
+                            <p>Memiliki kemampuan dalam meningkatkan efisiensi produksi, menurunkan tingkat reject, 
+                            serta mendukung kelancaran proses manufaktur melalui desain teknis dan perencanaan 
+                            yang sistematis.</p>
+                        </div>
+                        <button class="edit-btn" data-edit="aboutText2">Edit</button>
+                        
+                        <div class="skills-grid">
+                            <div class="skill-category editable" id="technicalSkills">
+                                <h3>Keahlian Teknis</h3>
+                                <div class="skill-items">
+                                    <div class="skill-item">AutoCAD</div>
+                                    <div class="skill-item">SolidWorks (2D & 3D Drafting)</div>
+                                    <div class="skill-item">Membaca & Membuat Gambar Teknik</div>
+                                    <div class="skill-item">Bubut, Milling, Molding, Assembly</div>
+                                    <div class="skill-item">Production Planning & Stock Monitoring</div>
+                                    <div class="skill-item">Quality Control & Problem Solving</div>
+                                    <div class="skill-item">Preventive Maintenance & Mold Management</div>
+                                    <div class="skill-item">Microsoft Office (Excel, Word, PowerPoint)</div>
+                                    <div class="skill-item">Basic ERP / Sistem Monitoring Produksi</div>
+                                </div>
+                                <button class="add-btn" data-add="technicalSkills">+ Tambah Skill</button>
+                            </div>
+                            
+                            <div class="skill-category editable" id="personalSkills">
+                                <h3>Keahlian Personal</h3>
+                                <div class="skill-items">
+                                    <div class="skill-item">Problem Solving & Berpikir Analitis</div>
+                                    <div class="skill-item">Teamwork & Koordinasi Lintas Departemen</div>
+                                    <div class="skill-item">Manajemen Waktu & Efisiensi Proses</div>
+                                    <div class="skill-item">Detail-Oriented & Teliti dalam pekerjaan</div>
+                                    <div class="skill-item">Disiplin & Tanggung Jawab</div>
+                                    <div class="skill-item">Proaktif dan Cepat Beradaptasi</div>
+                                    <div class="skill-item">Komunikasi Efektif</div>
+                                </div>
+                                <button class="add-btn" data-add="personalSkills">+ Tambah Skill</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 style="margin-bottom: 30px; font-size: 1.8rem; color: var(--primary);">Pengalaman Kerja</h3>
+                        
+                        <div class="experience-timeline">
+                            <div class="experience-item editable" id="experience1">
+                                <div class="experience-header">
+                                    <h3 class="experience-title">Mechanical Drafter Manufacturing</h3>
+                                    <div class="experience-date">Jun 2025 - Sekarang</div>
+                                </div>
+                                <div class="experience-content">
+                                    <ul>
+                                        <li>Membuat sistem pendataan molding beserta jangka waktu pakai (lifetime usage) untuk mendukung preventive maintenance dan mengurangi downtime produksi</li>
+                                        <li>Menyatukan berbagai variasi pengaturan molding menjadi 1 standar variasi, sehingga mempermudah operator dan menekan risiko kesalahan setting</li>
+                                        <li>Berhasil mempercepat proses kerja operator bubut dengan membuat drawing detail yang lebih jelas, sehingga mengurangi waktu setup hingga 15% lebih cepat</li>
+                                    </ul>
+                                </div>
+                                <button class="edit-btn" data-edit="experience1">Edit</button>
+                                <button class="delete-btn" data-delete="experience1" data-type="experience">Hapus</button>
+                            </div>
+                            
+                            <div class="experience-item editable" id="experience2">
+                                <div class="experience-header">
+                                    <h3 class="experience-title">Staff Produksi</h3>
+                                    <div class="experience-date">Jun 2024 - Jun 2025</div>
+                                </div>
+                                <div class="experience-content">
+                                    <ul>
+                                        <li>Menganalisis dan menurunkan tingkat overconsumption material melalui evaluasi data penggunaan bahan, identifikasi penyebab pemborosan, dan koordinasi dengan tim terkait untuk perbaikan proses</li>
+                                        <li>Menurunkan non-conformance bahan Div. Produksi dengan cara melakukan monitoring bahan</li>
+                                        <li>Meningkatkan productivity penggunaan bahan WIP dari 2 Ton menjadi 724,5 kg dalam kurun waktu Desember 2024-Maret 2025 dengan cara membuat monitoring Stock WIP dan planning item Produksi</li>
+                                        <li>Menurunkan reject Div. Produksi pada mesin spiral dari 8% menjadi 3% dengan cara melakukan TFT (Task force Team)</li>
+                                    </ul>
+                                </div>
+                                <button class="edit-btn" data-edit="experience2">Edit</button>
+                                <button class="delete-btn" data-delete="experience2" data-type="experience">Hapus</button>
+                            </div>
+                        </div>
+                        <button class="add-btn" data-add="experience">+ Tambah Pengalaman</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Work Page - DUPLIKAT DARI ACHIEVEMENTS -->
+            <div class="page" id="workPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Work</h2>
+                
+                <div style="background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%); border-radius: var(--border-radius); padding: 40px; margin-bottom: 40px; border: 1px solid rgba(255, 215, 0, 0.1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;">
+                    <h2 style="color: var(--primary); margin-bottom: 15px; font-size: 1.8rem;">Dokumentasi Pekerjaan</h2>
+                    <p style="color: var(--gray); line-height: 1.7; margin-bottom: 15px;">Koleksi foto dokumentasi pekerjaan dan proyek yang telah dikerjakan sebagai Mechanical Drafter dan Staff Produksi.</p>
+                    <p style="color: var(--gray); line-height: 1.7;"><strong>Kategori:</strong> Mechanical Drafting, Production Work, Quality Control, Process Improvement</p>
+                </div>
+                
+                <!-- Work Grid -->
+                <div class="work-grid" id="workContainer">
+                    <!-- Work items akan di-render oleh JavaScript -->
+                </div>
+                
+                <!-- Tombol Add untuk Work -->
+                <button class="add-btn" data-add="work" id="addWorkBtn">+ Tambah Work</button>
+            </div>
+            
+            <!-- Achievements Page -->
+            <div class="page" id="achievementsPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Pencapaian & Sertifikat</h2>
+                
+                <div class="achievements-grid" id="achievementsContainer">
+                    <!-- Achievement cards akan di-render oleh JavaScript -->
+                </div>
+                <button class="add-btn" data-add="achievement">+ Tambah Pencapaian</button>
+            </div>
+            
+            <!-- Projects Page -->
+            <div class="page" id="projectsPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Proyek & Portofolio</h2>
+                
+                <div class="projects-grid" id="projectsContainer">
+                    <div class="project-card editable" id="project1">
+                        <h3><i class="fas fa-drafting-compass"></i> Sistem Pendataan Molding</h3>
+                        <p>Membuat sistem pendataan molding beserta jangka waktu pakai (lifetime usage) untuk mendukung preventive maintenance dan mengurangi downtime produksi</p>
+                        
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">100%</span>
+                                <span class="stat-label">Data Manual</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value improvement">↓ 40%</span>
+                                <span class="stat-label">Downtime</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">15%</span>
+                                <span class="stat-label">Setup Time ↓</span>
+                            </div>
+                        </div>
+                        <button class="edit-btn" data-edit="project1">Edit</button>
+                        <button class="delete-btn" data-delete="project1" data-type="project">Hapus</button>
+                    </div>
+                    
+                    <div class="project-card editable" id="project2">
+                        <h3><i class="fas fa-chart-line"></i> Optimasi Produksi WIP</h3>
+                        <p>Meningkatkan productivity penggunaan bahan WIP dari 2 Ton menjadi 724,5 kg dengan monitoring Stock WIP dan planning item Produksi</p>
+                        
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">2 Ton</span>
+                                <span class="stat-label">Sebelum</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value improvement">↓ 63.8%</span>
+                                <span class="stat-label">Pengurangan</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">724.5 kg</span>
+                                <span class="stat-label">Sesudah</span>
+                            </div>
+                        </div>
+                        <button class="edit-btn" data-edit="project2">Edit</button>
+                        <button class="delete-btn" data-delete="project2" data-type="project">Hapus</button>
+                    </div>
+                    
+                    <div class="project-card editable" id="project3">
+                        <h3><i class="fas fa-cogs"></i> Reduksi Reject Mesin Spiral</h3>
+                        <p>Menurunkan reject Div. Produksi pada mesin spiral dari 8% menjadi 3% dengan cara melakukan TFT (Task force Team)</p>
+                        
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">8%</span>
+                                <span class="stat-label">Sebelum</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value reduction">↓ 62.5%</span>
+                                <span class="stat-label">Penurunan</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">3%</span>
+                                <span class="stat-label">Sesudah</span>
+                            </div>
+                        </div>
+                        <button class="edit-btn" data-edit="project3">Edit</button>
+                        <button class="delete-btn" data-delete="project3" data-type="project">Hapus</button>
+                    </div>
+                </div>
+                <button class="add-btn" data-add="project">+ Tambah Proyek</button>
+            </div>
+            
+            <!-- Dashboard Page -->
+            <div class="page" id="dashboardPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Dashboard Statistik</h2>
+                
+                <div class="dashboard-periods">
+                    <!-- Staff Production Period -->
+                    <div class="period-section editable" id="staffPeriod">
+                        <div class="period-header">
+                            <h2 class="period-title">Staff Production</h2>
+                            <div class="period-date">
+                                <i class="far fa-calendar"></i> Jun 2024 - Jun 2025
+                            </div>
+                        </div>
+                        
+                        <div class="period-stats">
+                            <div class="period-stat editable" id="staffStat1">
+                                <div class="period-stat-value staff">60%</div>
+                                <div class="period-stat-label">Penurunan Reject Material</div>
+                                <button class="edit-btn" data-edit="staffStat1">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="staffStat2">
+                                <div class="period-stat-value staff">63.8%</div>
+                                <div class="period-stat-label">Pengurangan WIP Inventory</div>
+                                <button class="edit-btn" data-edit="staffStat2">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="staffStat3">
+                                <div class="period-stat-value staff">62.5%</div>
+                                <div class="period-stat-label">Penurunan Reject Mesin Spiral</div>
+                                <button class="edit-btn" data-edit="staffStat3">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="staffStat4">
+                                <div class="period-stat-value staff">90%</div>
+                                <div class="period-stat-label">Kesesuaian Dokumen (KPH)</div>
+                                <button class="edit-btn" data-edit="staffStat4">Edit</button>
+                            </div>
+                        </div>
+                        <button class="edit-btn" data-edit="staffPeriod">Edit</button>
+                    </div>
+                    
+                    <!-- Drafter Period -->
+                    <div class="period-section editable" id="drafterPeriod">
+                        <div class="period-header">
+                            <h2 class="period-title">Mechanical Drafter</h2>
+                            <div class="period-date">
+                                <i class="far fa-calendar"></i> Jun 2025 - Sekarang
+                            </div>
+                        </div>
+                        
+                        <div class="period-stats">
+                            <div class="period-stat editable" id="drafterStat1">
+                                <div class="period-stat-value drafter">15%</div>
+                                <div class="period-stat-label">Pengurangan Waktu Setup</div>
+                                <button class="edit-btn" data-edit="drafterStat1">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="drafterStat2">
+                                <div class="period-stat-value drafter">40%</div>
+                                <div class="period-stat-label">Pengurangan Downtime</div>
+                                <button class="edit-btn" data-edit="drafterStat2">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="drafterStat3">
+                                <div class="period-stat-value drafter">67%</div>
+                                <div class="period-stat-label">Pengurangan Lead Time</div>
+                                <button class="edit-btn" data-edit="drafterStat3">Edit</button>
+                            </div>
+                            
+                            <div class="period-stat editable" id="drafterStat4">
+                                <div class="period-stat-value drafter">100%</div>
+                                <div class="period-stat-label">Standarisasi Molding Setting</div>
+                                <button class="edit-btn" data-edit="drafterStat4">Edit</button>
+                            </div>
+                        </div>
+                        <button class="edit-btn" data-edit="drafterPeriod">Edit</button>
+                    </div>
+                </div>
+                
+                <div class="dashboard-chart editable" id="dashboardChart">
+                    <h3>Grafik Perbandingan Performa</h3>
+                    <div style="height: 350px; background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%); border-radius: 12px; display: flex; align-items: flex-end; padding: 25px; border: 1px solid rgba(255, 215, 0, 0.1);">
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                            <div style="height: 180px; width: 50px; background: var(--gradient-success); margin: 0 15px; border-radius: 8px 8px 0 0;"></div>
+                            <div style="margin-top: 15px; color: var(--primary); font-weight: 600;">Staff</div>
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                            <div style="height: 220px; width: 50px; background: var(--gradient-purple); margin: 0 15px; border-radius: 8px 8px 0 0;"></div>
+                            <div style="margin-top: 15px; color: var(--primary); font-weight: 600;">Drafter</div>
+                        </div>
+                        <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                            <div style="height: 280px; width: 50px; background: var(--gradient-gold); margin: 0 15px; border-radius: 8px 8px 0 0;"></div>
+                            <div style="margin-top: 15px; color: var(--primary); font-weight: 600;">Total</div>
+                        </div>
+                    </div>
+                    <button class="edit-btn" data-edit="dashboardChart">Edit</button>
+                </div>
+            </div>
+            
+            <!-- Chatroom Page -->
+            <div class="page" id="chatroomPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;">Chat Room</h2>
+                <p style="text-align: center; margin-bottom: 50px; color: var(--gray); max-width: 800px; margin-left: auto; margin-right: auto; font-size: 1.2rem; line-height: 1.6;">
+                    Feel free to share your thoughts, suggestions, questions, or anything else!
+                </p>
+                
+                <div class="chatroom-container">
+                    <div class="chatroom-header">
+                        <h3>Live Chat Room</h3>
+                        <p>Join the conversation with other visitors</p>
+                    </div>
+                    
+                    <div class="chatroom-messages" id="chatMessages">
+                        <div class="message">
+                            <div class="message-info">
+                                <span class="message-user">Vernita Chesnauer</span>
+                                <span class="message-time">01/04/2025, 14:00</span>
+                            </div>
+                            <div class="message-content">
+                                Hahnyuga! Love the design of this portfolio!
+                            </div>
+                        </div>
+                        
+                        <div class="message">
+                            <div class="message-info">
+                                <span class="message-user">Rufa Resto Ramadhani</span>
+                                <span class="message-time">01/04/2025, 14:37</span>
+                            </div>
+                            <div class="message-content">
+                                Halo mas! Awesome portfolio website!
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chatroom-input">
+                        <input type="text" id="chatInput" placeholder="Type your message here...">
+                        <button id="sendMessage">Send</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Page -->
+            <div class="page" id="contactPage">
+                <h2 style="margin-bottom: 40px; font-size: 2.5rem; background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Hubungi Saya</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-card editable" id="contactEmail">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email</h3>
+                            <p>aryasavarinasah@gmail.com</p>
+                            <button class="edit-btn" data-edit="contactEmail">Edit</button>
+                        </div>
+                        
+                        <div class="contact-card editable" id="contactPhone">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Telepon</h3>
+                            <p>089520336532</p>
+                            <button class="edit-btn" data-edit="contactPhone">Edit</button>
+                        </div>
+                        
+                        <div class="contact-card editable" id="contactLocation">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Lokasi</h3>
+                            <p>Kosambi, Indonesia</p>
+                            <button class="edit-btn" data-edit="contactLocation">Edit</button>
+                        </div>
+                        
+                        <div class="contact-card editable" id="contactLinkedin">
+                            <div class="contact-icon">
+                                <i class="fab fa-linkedin"></i>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <p>linkedin.com/in/arya-savariansah</p>
+                            <button class="edit-btn" data-edit="contactLinkedin">Edit</button>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Kirim Pesan</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Nama</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Pesan</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal untuk Upload Foto -->
+    <div class="modal" id="imageUploadModal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitle">Upload Foto</h3>
+            <div class="form-group">
+                <input type="file" id="imageInput" accept="image/*" class="admin-input">
+            </div>
+            <div class="image-preview" id="imagePreview">
+                <img id="previewImage" src="" alt="Preview">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="saveImageBtn">Simpan Foto</button>
+                <button class="modal-btn secondary" id="cancelImageBtn">Batal</button>
+                <button class="modal-btn secondary" id="removeImageBtn" style="display: none;">Hapus Foto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Upload Work -->
+    <div class="modal upload-modal" id="workUploadModal">
+        <div class="upload-modal-content">
+            <button class="upload-modal-close" id="closeUploadModal">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="upload-modal-header">
+                <h2 class="upload-modal-title">Tambah Work Baru</h2>
+                <p class="upload-modal-subtitle">Tambahkan dokumentasi pekerjaan Anda</p>
+            </div>
+            
+            <form class="upload-form" id="workUploadForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="workTitle"><i class="fas fa-heading"></i> Judul Pekerjaan</label>
+                        <input type="text" id="workTitle" placeholder="Contoh: Standarisasi Molding Setting" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workDate"><i class="far fa-calendar"></i> Tanggal</label>
+                        <input type="text" id="workDate" placeholder="DD/MM/YYYY" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="workCategory"><i class="fas fa-tag"></i> Kategori</label>
+                        <select id="workCategory" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="Mechanical Drafting">Mechanical Drafting</option>
+                            <option value="Production Work">Production Work</option>
+                            <option value="Quality Control">Quality Control</option>
+                            <option value="Process Improvement">Process Improvement</option>
+                            <option value="Maintenance">Maintenance</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="workDescription"><i class="fas fa-align-left"></i> Deskripsi Singkat</label>
+                        <input type="text" id="workDescription" placeholder="Jelaskan pekerjaan ini secara singkat" required>
+                    </div>
+                </div>
+                
+                <div class="upload-image-area" id="imageDropArea">
+                    <div class="upload-image-icon">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+                    <div class="upload-image-text">Upload Foto</div>
+                    <div class="upload-image-subtext">Drag & drop gambar atau klik untuk memilih</div>
+                    <button type="button" class="upload-browse-btn" id="browseImageBtn">
+                        <i class="fas fa-folder-open"></i> Browse Files
+                    </button>
+                    <input type="file" id="imageFileInput" accept="image/*" style="display: none;">
+                    
+                    <div class="upload-progress-container" id="uploadProgressContainer">
+                        <div class="upload-progress-bar" id="uploadProgressBar"></div>
+                    </div>
+                    <div class="upload-percentage" id="uploadPercentage">0%</div>
+                    
+                    <div class="upload-image-preview" id="imagePreviewContainer">
+                        <img id="imagePreview" src="" alt="Preview">
+                    </div>
+                    
+                    <div class="image-actions" id="imageActions" style="display: none;">
+                        <button type="button" class="image-action-btn" id="changeImageBtn">
+                            <i class="fas fa-sync-alt"></i> Ganti Foto
+                        </button>
+                        <button type="button" class="image-action-btn" id="removeImageBtn">
+                            <i class="fas fa-trash-alt"></i> Hapus
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="upload-modal-buttons">
+                    <button type="submit" class="upload-modal-btn primary" id="saveWorkBtn">
+                        <i class="fas fa-save"></i> Simpan Work
+                    </button>
+                    <button type="button" class="upload-modal-btn secondary" id="cancelUploadBtn">
+                        <i class="fas fa-times"></i> Batal
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal Zoom untuk Gambar -->
+    <div class="modal zoom-modal" id="zoomModal">
+        <button class="close-zoom" id="closeZoom">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="zoom-content">
+            <img id="zoomedImage" class="zoomed-image" src="" alt="Zoomed Image">
+            <div class="zoom-caption" id="zoomCaption"></div>
+        </div>
+    </div>
+    
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Loading...</div>
+        <div class="upload-progress" id="uploadProgress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="upload-percentage-old" id="uploadPercentageOld">0%</div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
